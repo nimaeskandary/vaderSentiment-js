@@ -17,7 +17,7 @@ This JavaScript port of VADER is licensed under the terms of the [Apache-2.0 Lic
 Example use:
 
 ```
-cosnt SentimentIntensityAnalyzer = require('vaderSentiment-js');
+cosnt SentimentIntensityAnalyzer = require('vader-sentiment');
 const input = 'VADER is very smart, handsome, and funny';
 const intensity = SentimentIntensityAnalyzer.polarity_scores(input);
 console.log(intensity);

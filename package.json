@@ -1,5 +1,5 @@
 {
-  "name": "vaderSentiment-js",
+  "name": "vader-sentiment",
   "version": "1.0.0",
   "description": "javascript port of vader sentiment tool",
   "main": "src/index.js",
