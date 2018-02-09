@@ -1,0 +1,33 @@
+{
+  "name": "vaderSentiment-js",
+  "version": "1.0.0",
+  "description": "javascript port of vader sentiment tool",
+  "main": "src/index.js",
+  "scripts": {
+    "tests": "tape tests/**/*.js | faucet",
+    "prettier": "prettier --print-width 100 --no-bracket-spacing --tab-width 2 --single-quote --write 'src/**/*.js' 'tests/**/*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vaderSentiment/vaderSentiment-js.git"
+  },
+  "keywords": [
+    "vaderSentiment",
+    "vader",
+    "sentiment",
+    "polarity"
+  ],
+  "contributors": [
+    "Nima Eskandary <nima_eskandary@comcast.com>"
+  ],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/vaderSentiment/vaderSentiment-js/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "faucet": "^0.0.1",
+    "tape": "^4.8.0",
+    "prettier": "^1.9.2"
+  }
+}
