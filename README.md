@@ -14,6 +14,12 @@ This JavaScript port of VADER is licensed under the terms of the [Apache-2.0 Lic
 
 ## Usage
 
+install via npm
+
+```
+npm install --save vader-sentiment
+```
+
 Example use:
 
 ```
