@@ -11,82 +11,82 @@
  * limitations under the License.
  */
 
-const vaderSentiment = require('../src/vaderSentiment');
+import {negated, NEGATE} from '../src/vaderSentiment';
 let test = require('tape');
 
 test('negated returns false if no input words', t => {
   const input_words = [];
-  const negated = vaderSentiment.negated(input_words);
-  t.equal(negated, false);
+  const output = negated(input_words);
+  t.equal(output, false);
   t.end();
 });
 
 test('negated returns false if it contains a non negate input', t => {
   const input_words = ['dummy'];
-  const negated = vaderSentiment.negated(input_words);
-  t.equal(negated, false);
+  const output = negated(input_words);
+  t.equal(output, false);
   t.end();
 });
 
 test('negated returns false if it contains multiple non negate inputs', t => {
   const input_words = ['dummyone', 'dummytwo', 'dummythree'];
-  const negated = vaderSentiment.negated(input_words);
-  t.equal(negated, false);
+  const output = negated(input_words);
+  t.equal(output, false);
   t.end();
 });
 
 test('negated returns true if it contains a negate input', t => {
-  const input_words = [vaderSentiment.NEGATE[0]];
-  const negated = vaderSentiment.negated(input_words);
-  t.equal(negated, true);
+  const input_words = [NEGATE[0]];
+  const output = negated(input_words);
+  t.equal(output, true);
   t.end();
 });
 
 test('negated returns true if it contains multiple negate inputs', t => {
-  const input_words = ['cannot', vaderSentiment.NEGATE[0], vaderSentiment.NEGATE[1]];
-  const negated = vaderSentiment.negated(input_words);
-  t.equal(negated, true);
+  const input_words = ['cannot', NEGATE[0], NEGATE[1]];
+  const output = negated(input_words);
+  t.equal(output, true);
   t.end();
 });
 
 test('negated returns true if it contains negate and non negate words', t => {
-  const input_words = [vaderSentiment.NEGATE[0], 'dummy'];
-  const negated = vaderSentiment.negated(input_words);
-  t.equal(negated, true);
+  const input_words = [NEGATE[0], 'dummy'];
+  const output = negated(input_words);
+  t.equal(output, true);
   t.end();
 });
 
 test("negated returns true when include_nt is true and contains a n't", t => {
   const input_words = ['dummyone', "somewordn't", 'dummytwo'];
-  const negated = vaderSentiment.negated(input_words);
-  t.equal(negated, true);
+  const output = negated(input_words);
+  t.equal(output, true);
   t.end();
 });
 
 test("negated returns false when include_nt is true and doesn't contains a n't", t => {
   const input_words = ['dummyone', "somewordn't", 'dummytwo'];
-  const negated = vaderSentiment.negated(input_words, false);
-  t.equal(negated, false);
+  const output = negated(input_words, false);
+  t.equal(output, false);
   t.end();
 });
 
 test('negated returns true if it contains least', t => {
   const input_words = ['dummy', 'dummy', 'least'];
-  const negated = vaderSentiment.negated(input_words);
-  t.equal(negated, true);
+  const output = negated(input_words);
+  t.equal(output, true);
   t.end();
 });
 
 test('negated returns false if it contains least at index 0', t => {
   const input_words = ['least', 'dummy', 'dummy'];
-  const negated = vaderSentiment.negated(input_words);
-  t.equal(negated, false);
+  const output = negated(input_words);
+  t.equal(output, false);
   t.end();
 });
 
 test('negated returns false if previous word is at', t => {
   const input_words = ['dummy', 'at', 'least'];
-  const negated = vaderSentiment.negated(input_words);
-  t.equal(negated, false);
+  const output = negated(input_words);
+  t.equal(output, false);
   t.end();
 });

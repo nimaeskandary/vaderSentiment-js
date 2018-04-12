@@ -11,12 +11,12 @@
  * limitations under the License.
  */
 
-const vaderSentiment = require('../src/vaderSentiment');
+import {scalar_inc_dec, SentiText, PUNC_LIST} from '../src/vaderSentiment';
 let test = require('tape');
 
 test('SentiText.get_words_plus_punc returns empty dict if given no words', t => {
   const input = '';
-  const sentiText = new vaderSentiment.SentiText(input);
+  const sentiText = new SentiText(input);
   const output = sentiText.get_words_plus_punc();
   const expected = {};
 
@@ -26,7 +26,7 @@ test('SentiText.get_words_plus_punc returns empty dict if given no words', t => 
 
 test('SentiText.get_words_plus_punc creates punct dict for word', t => {
   const input = 'word';
-  const sentiText = new vaderSentiment.SentiText(input);
+  const sentiText = new SentiText(input);
   const output = sentiText.get_words_plus_punc();
   const expected = {
     '.word': 'word',
@@ -64,7 +64,7 @@ test('SentiText.get_words_plus_punc creates punct dict for word', t => {
     '!?!?word': 'word',
     'word!?!?': 'word'
   };
-  const expected_num_elements = vaderSentiment.PUNC_LIST.length * input.split(/\s/).length * 2;
+  const expected_num_elements = PUNC_LIST.length * input.split(/\s/).length * 2;
 
   t.equals(Object.keys(expected).length, expected_num_elements);
   t.equals(Object.keys(output).length, expected_num_elements);
@@ -75,9 +75,9 @@ test('SentiText.get_words_plus_punc creates punct dict for word', t => {
 
 test('SentiText.get_words_plus_punc creates right size punct dict for multiple words', t => {
   const input = 'multiple words test';
-  const sentiText = new vaderSentiment.SentiText(input);
+  const sentiText = new SentiText(input);
   const output = sentiText.get_words_plus_punc();
-  const expected_num_elements = vaderSentiment.PUNC_LIST.length * input.split(/\s/).length * 2;
+  const expected_num_elements = PUNC_LIST.length * input.split(/\s/).length * 2;
 
   t.equals(Object.keys(output).length, expected_num_elements);
   t.end();
@@ -85,7 +85,7 @@ test('SentiText.get_words_plus_punc creates right size punct dict for multiple w
 
 test('SentiText.get_words_plus_punc removes singletons', t => {
   const input = 'a b c';
-  const sentiText = new vaderSentiment.SentiText(input);
+  const sentiText = new SentiText(input);
   const output = sentiText.get_words_plus_punc();
   const expected_num_elements = 0;
 
@@ -95,7 +95,7 @@ test('SentiText.get_words_plus_punc removes singletons', t => {
 
 test('SentiText.get_words_and_emoticons preserves non punctuation emoticons', t => {
   const input = 'an emoticon 8D';
-  const sentiText = new vaderSentiment.SentiText(input);
+  const sentiText = new SentiText(input);
   const output = sentiText.get_words_and_emoticons();
   const expected = ['an', 'emoticon', '8D'];
 
@@ -105,7 +105,7 @@ test('SentiText.get_words_and_emoticons preserves non punctuation emoticons', t 
 
 test('SentiText.get_words_and_emoticons removes trailing punctuation', t => {
   const input = 'some words!!!';
-  const sentiText = new vaderSentiment.SentiText(input);
+  const sentiText = new SentiText(input);
   const output = sentiText.get_words_and_emoticons();
   const expected = ['some', 'words'];
 
@@ -115,7 +115,7 @@ test('SentiText.get_words_and_emoticons removes trailing punctuation', t => {
 
 test('SentiText.get_words_and_emoticons removes leading punctuation', t => {
   const input = '??some words';
-  const sentiText = new vaderSentiment.SentiText(input);
+  const sentiText = new SentiText(input);
   const output = sentiText.get_words_and_emoticons();
   const expected = ['some', 'words'];
 
@@ -125,7 +125,7 @@ test('SentiText.get_words_and_emoticons removes leading punctuation', t => {
 
 test('SentiText.get_words_and_emoticons returns empty array when input empty', t => {
   const input = '';
-  const sentiText = new vaderSentiment.SentiText(input);
+  const sentiText = new SentiText(input);
   const output = sentiText.get_words_and_emoticons();
   const expected = [];
 
@@ -135,7 +135,7 @@ test('SentiText.get_words_and_emoticons returns empty array when input empty', t
 
 test('SentiText.get_words_and_emoticons preserves contractions', t => {
   const input = "this contraction don't";
-  const sentiText = new vaderSentiment.SentiText(input);
+  const sentiText = new SentiText(input);
   const output = sentiText.get_words_and_emoticons();
   const expected = ['this', 'contraction', "don't"];
 

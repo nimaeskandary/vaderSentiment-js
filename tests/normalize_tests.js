@@ -11,13 +11,13 @@
  * limitations under the License.
  */
 
-const vaderSentiment = require('../src/vaderSentiment');
+import {normalize} from '../src/vaderSentiment';
 let test = require('tape');
 
 test('normalize returns score that is bounded by -1 and 1', t => {
   const inputs = [-1000, -100, -10, -5, -1, -0.5, 0, 0.5, 1, 5, 10, 100, 1000];
   for (let i = 0; i < inputs.length; i++) {
-    const output = vaderSentiment.normalize(inputs[i]);
+    const output = normalize(inputs[i]);
     const lowerBounded = output >= -1.0;
     const upperBounded = output <= 1.0;
     t.equal(lowerBounded, true);

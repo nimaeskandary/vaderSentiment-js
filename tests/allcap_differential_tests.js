@@ -11,33 +11,33 @@
  * limitations under the License.
  */
 
-const vaderSentiment = require('../src/vaderSentiment');
+import {allcap_differential} from '../src/vaderSentiment';
 let test = require('tape');
 
 test('allcap_differential returns false for empty array', t => {
   const input = [];
-  const output = vaderSentiment.allcap_differential(input);
+  const output = allcap_differential(input);
   t.equal(output, false);
   t.end();
 });
 
 test('allcap_differential returns false if no caps', t => {
   const input = ['some', 'dummy', 'words'];
-  const output = vaderSentiment.allcap_differential(input);
+  const output = allcap_differential(input);
   t.equal(output, false);
   t.end();
 });
 
 test('allcap_differential returns false if all caps', t => {
   const input = ['SOME', 'DUMMY', 'WORDS'];
-  const output = vaderSentiment.allcap_differential(input);
+  const output = allcap_differential(input);
   t.equal(output, false);
   t.end();
 });
 
 test('allcap_differential returns true if some caps', t => {
   const input = ['SOME', 'DUMMY', 'words'];
-  const output = vaderSentiment.allcap_differential(input);
+  const output = allcap_differential(input);
   t.equal(output, true);
   t.end();
 });

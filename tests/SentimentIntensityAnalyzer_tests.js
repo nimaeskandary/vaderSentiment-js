@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-const SentimentIntensityAnalyzer = require('../src');
+import {SentimentIntensityAnalyzer} from '../src/vaderSentiment';
 let test = require('tape');
 
 test('SentimentIntensityAnalyzer.polarity_scores match original demo output', t => {
