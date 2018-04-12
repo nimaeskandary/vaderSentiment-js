@@ -11,40 +11,40 @@
  * limitations under the License.
  */
 
-const vaderSentiment = require('../src/vaderSentiment');
+import {is_upper_python} from '../src/vaderSentiment';
 let test = require('tape');
 
 test('is_upper_python is false for empty string', t => {
   const word = '';
-  const result = vaderSentiment.is_upper_python(word);
+  const result = is_upper_python(word);
   t.equal(result, false);
   t.end();
 });
 
 test('is_upper_python is true for all caps string', t => {
   const word = 'WORD';
-  const result = vaderSentiment.is_upper_python(word);
+  const result = is_upper_python(word);
   t.equal(result, true);
   t.end();
 });
 
 test('is_upper_python is false for only special characters', t => {
   const word = ':)';
-  const result = vaderSentiment.is_upper_python(word);
+  const result = is_upper_python(word);
   t.equal(result, false);
   t.end();
 });
 
 test('is_upper_python is true for special characters and all caps characters', t => {
   const word = ':)WORD:(';
-  const result = vaderSentiment.is_upper_python(word);
+  const result = is_upper_python(word);
   t.equal(result, true);
   t.end();
 });
 
 test('is_upper_python is false for special characters and lowercase characters', t => {
   const word = ':)word:(';
-  const result = vaderSentiment.is_upper_python(word);
+  const result = is_upper_python(word);
   t.equal(result, false);
   t.end();
 });

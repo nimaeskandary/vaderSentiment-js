@@ -42,7 +42,7 @@
     'xp'
 */
 
-const lexicon = {
+export const lexicon = {
   '$:': -1.5,
   '%)': -0.4,
   '%-)': -1.5,
@@ -7547,5 +7547,3 @@ const lexicon = {
   '}:-(': -2.1,
   '}:-)': 0.3
 };
-
-exports.lexicon = lexicon;

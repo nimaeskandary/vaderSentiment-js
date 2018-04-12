@@ -23,26 +23,20 @@
 const LEXICON = require('./vader_lexicon.js').lexicon;
 
 // (empirically derived mean sentiment intensity rating increase for booster words)
-const B_INCR = 0.293;
-exports.B_INCR = B_INCR;
+export const B_INCR = 0.293;
 
-const B_DECR = -0.293;
-exports.B_DECR = B_DECR;
+export const B_DECR = -0.293;
 
 // (empirically derived mean sentiment intensity rating increase for using
 // ALLCAPs to emphasize a word)
-const C_INCR = 0.733;
-exports.C_INCR = C_INCR;
+export const C_INCR = 0.733;
 
-const N_SCALAR = -0.74;
-exports.N_SCALAR = N_SCALAR;
+export const N_SCALAR = -0.74;
 
-const REGEX_REMOVE_PUNCTUATION = new RegExp(/[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/, 'g');
+export const REGEX_REMOVE_PUNCTUATION = new RegExp(/[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/, 'g');
 // ` // <- to fix ide thinking grave accent in regex is starting a template quote
 
-exports.REGEX_REMOVE_PUNCTUATION = REGEX_REMOVE_PUNCTUATION;
-
-const PUNC_LIST = [
+export const PUNC_LIST = [
   '.',
   '!',
   '?',
@@ -61,9 +55,8 @@ const PUNC_LIST = [
   '?!?!',
   '!?!?'
 ];
-exports.PUNC_LIST = PUNC_LIST;
 
-const NEGATE = [
+export const NEGATE = [
   'aint',
   'arent',
   'cannot',
@@ -124,12 +117,11 @@ const NEGATE = [
   'seldom',
   'despite'
 ];
-exports.NEGATE = NEGATE;
 
 // booster/dampener 'intensifiers' or 'degree adverbs'
 // http://en.wiktionary.org/wiki/Category:English_degree_adverbs
 
-const BOOSTER_DICT = {
+export const BOOSTER_DICT = {
   absolutely: B_INCR,
   amazingly: B_INCR,
   awfully: B_INCR,
@@ -197,10 +189,9 @@ const BOOSTER_DICT = {
   sortof: B_DECR,
   'sort-of': B_DECR
 };
-exports.BOOSTER_DICT = BOOSTER_DICT;
 
 // check for special case idioms using a sentiment-laden keyword known to VADER
-const SPECIAL_CASE_IDIOMS = {
+export const SPECIAL_CASE_IDIOMS = {
   'the shit': 3,
   'the bomb': 3,
   'bad ass': 1.5,
@@ -209,11 +200,10 @@ const SPECIAL_CASE_IDIOMS = {
   'kiss of death': -1.5,
   'hand to mouth': -2
 };
-exports.SPECIAL_CASE_IDIOMS = SPECIAL_CASE_IDIOMS;
 
 // static methods
 
-const negated = (input_words, include_nt = true) => {
+export const negated = (input_words, include_nt = true) => {
   /**
     Determine if input contains negation words
    */
@@ -238,9 +228,7 @@ const negated = (input_words, include_nt = true) => {
   return i !== -1 && i > 0 && input_words[i - 1] !== 'at';
 };
 
-exports.negated = negated;
-
-const normalize = (score, alpha = 15) => {
+export const normalize = (score, alpha = 15) => {
   /**
     Normalize the score to be between -1 and 1 using an alpha that
     approximates the max expected value
@@ -256,9 +244,7 @@ const normalize = (score, alpha = 15) => {
   }
 };
 
-exports.normalize = normalize;
-
-const allcap_differential = words => {
+export const allcap_differential = words => {
   /**
     Check whether just some words in the input are ALL CAPS
   */
@@ -273,9 +259,7 @@ const allcap_differential = words => {
   return cap_differential > 0 && cap_differential < words.length;
 };
 
-exports.allcap_differential = allcap_differential;
-
-const scalar_inc_dec = (word, valence, is_cap_diff) => {
+export const scalar_inc_dec = (word, valence, is_cap_diff) => {
   /**
       Check if the preceding words increase, decrease, or negate/nullify the
       valence
@@ -300,9 +284,7 @@ const scalar_inc_dec = (word, valence, is_cap_diff) => {
   return scalar;
 };
 
-exports.scalar_inc_dec = scalar_inc_dec;
-
-const is_upper_python = word => {
+export const is_upper_python = word => {
   /**
       Python style "isupper" function. Requirements are that the string is at least one character in length,
       and does not consider an emoticon, e.g. :), as an uppercase word, but a string with special characters and only
@@ -316,9 +298,7 @@ const is_upper_python = word => {
   return false;
 };
 
-exports.is_upper_python = is_upper_python;
-
-class SentiText {
+export class SentiText {
   /**
     Identify sentiment-relevant string-level properties of input text
   */
@@ -378,9 +358,7 @@ class SentiText {
   }
 }
 
-exports.SentiText = SentiText;
-
-class SentimentIntensityAnalyzer {
+export class SentimentIntensityAnalyzer {
   /**
     Give a sentiment intensity score to sentences
   */
@@ -713,5 +691,3 @@ class SentimentIntensityAnalyzer {
     }
   }
 }
-
-exports.SentimentIntensityAnalyzer = SentimentIntensityAnalyzer;
