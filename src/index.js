@@ -18,4 +18,5 @@
     Weblogs and Social Media (ICWSM-14). Ann Arbor, MI, June 2014.
 */
 
-module.exports = require('./vaderSentiment').SentimentIntensityAnalyzer;
+import {SentimentIntensityAnalyzer} from './vaderSentiment.js';
+export default SentimentIntensityAnalyzer;
