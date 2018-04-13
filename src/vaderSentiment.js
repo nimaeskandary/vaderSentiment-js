@@ -33,7 +33,7 @@ export const C_INCR = 0.733;
 
 export const N_SCALAR = -0.74;
 
-export const REGEX_REMOVE_PUNCTUATION = new RegExp(/[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/, 'g');
+export const REGEX_REMOVE_PUNCTUATION = new RegExp(/[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/g);
 // ` // <- to fix ide thinking grave accent in regex is starting a template quote
 
 export const PUNC_LIST = [
