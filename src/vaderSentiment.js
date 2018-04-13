@@ -211,13 +211,13 @@ export const negated = (input_words, include_nt = true) => {
   let neg_words = [];
   neg_words.push.apply(neg_words, NEGATE);
   for (let i = 0; i < neg_words.length; i++) {
-    if (input_words.includes(neg_words[i])) {
+    if (input_words.indexOf(neg_words[i]) >= 0) {
       return true;
     }
   }
   if (include_nt === true) {
     for (let i = 0; i < input_words.length; i++) {
-      if (input_words[i].includes("n't")) {
+      if (input_words[i].indexOf("n't") >= 0) {
         return true;
       }
     }
