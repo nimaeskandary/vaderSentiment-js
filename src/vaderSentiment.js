@@ -204,11 +204,6 @@ export const SPECIAL_CASE_IDIOMS = {
 // set lexicon
 let lexicon = DEFAULT_LEXICON;
 
-// static methods
-export const loadLexicon = lexiconVal => {
-  lexicon = lexiconVal;
-};
-
 export const negated = (input_words, include_nt = true) => {
   /**
     Determine if input contains negation words
@@ -368,6 +363,10 @@ export class SentimentIntensityAnalyzer {
   /**
     Give a sentiment intensity score to sentences
   */
+
+  static loadLexicon(lexiconVal) {
+    lexicon = lexiconVal;
+  }
 
   static polarity_scores(text) {
     /**

@@ -38,7 +38,7 @@ const customLexicon = {
   ...
 };
 
-vader.loadLexicon(customLexicon);
+vader.SentimentIntensityAnalyzer.loadLexicon(customLexicon);
 ```
 
 #### About the Scoring

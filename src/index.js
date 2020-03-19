@@ -19,6 +19,4 @@
 */
 
 import {SentimentIntensityAnalyzer} from './vaderSentiment.js';
-
-export {loadLexicon, SentimentIntensityAnalyzer} from './vaderSentiment.js';
 export default SentimentIntensityAnalyzer;
