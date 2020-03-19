@@ -20,7 +20,7 @@
 
 // Constants
 
-const LEXICON = require('./vader_lexicon.js').lexicon;
+const DEFAULT_LEXICON = require('./vader_lexicon.js').lexicon;
 
 // (empirically derived mean sentiment intensity rating increase for booster words)
 export const B_INCR = 0.293;
@@ -201,7 +201,8 @@ export const SPECIAL_CASE_IDIOMS = {
   'hand to mouth': -2
 };
 
-// static methods
+// set lexicon
+let lexicon = DEFAULT_LEXICON;
 
 export const negated = (input_words, include_nt = true) => {
   /**
@@ -363,6 +364,10 @@ export class SentimentIntensityAnalyzer {
     Give a sentiment intensity score to sentences
   */
 
+  static loadLexicon(lexiconVal) {
+    lexicon = lexiconVal;
+  }
+
   static polarity_scores(text) {
     /**
       Return a float for sentiment strength based on the input text.
@@ -404,9 +409,9 @@ export class SentimentIntensityAnalyzer {
     const is_cap_diff = sentiText.is_cap_diff;
     const words_and_emoticons = sentiText.words_and_emoticons;
     const item_lowercase = item.toLowerCase();
-    if (LEXICON.hasOwnProperty(item_lowercase)) {
+    if (lexicon.hasOwnProperty(item_lowercase)) {
       // get the sentiment valence
-      valence = LEXICON[item_lowercase];
+      valence = lexicon[item_lowercase];
       // check if sentiment laden word is in ALL CAPS (while others aren't)
       if (is_upper_python(item) && is_cap_diff) {
         if (valence > 0) {
@@ -419,7 +424,7 @@ export class SentimentIntensityAnalyzer {
       for (let start_i = 0; start_i < 3; start_i++) {
         if (
           index > start_i &&
-          LEXICON.hasOwnProperty(words_and_emoticons[index - (start_i + 1)].toLowerCase()) === false
+          lexicon.hasOwnProperty(words_and_emoticons[index - (start_i + 1)].toLowerCase()) === false
         ) {
           // dampen the scalar modifier of preceding words and emoticons
           // (excluding the ones that immediately preceed the item) based
@@ -453,7 +458,7 @@ export class SentimentIntensityAnalyzer {
     if (
       index > 1 &&
       words_and_emoticons[index - 1].toLowerCase() === 'least' &&
-      LEXICON.hasOwnProperty(words_and_emoticons[index - 1].toLowerCase()) === false
+      lexicon.hasOwnProperty(words_and_emoticons[index - 1].toLowerCase()) === false
     ) {
       if (
         words_and_emoticons[index - 2].toLowerCase() !== 'at' &&
@@ -464,7 +469,7 @@ export class SentimentIntensityAnalyzer {
     } else if (
       index > 0 &&
       words_and_emoticons[index - 1].toLowerCase() === 'least' &&
-      LEXICON.hasOwnProperty(words_and_emoticons[index - 1].toLowerCase()) === false
+      lexicon.hasOwnProperty(words_and_emoticons[index - 1].toLowerCase()) === false
     ) {
       valence = valence * N_SCALAR;
     }
